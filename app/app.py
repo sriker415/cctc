@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import datetime as dt
-from cctc import clean_members, format, clean_infra, password
+from cctc import clean_members, format, clean_infra
 
 st.set_page_config(layout="wide")
 

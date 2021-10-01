@@ -2,8 +2,6 @@ import pandas as pd
 
 format = "%Y-%m-%d"
 
-password = 'CapeCodTech21'
-
 file_date = '2021-09-16'
 
 def clean_dates(df, column):
