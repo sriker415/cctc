@@ -27,12 +27,11 @@ if pwd == password:
             expire_date = pd.to_datetime(st.sidebar.date_input('Pick a Expiration Date')).strftime(format)
             result =""
             
+            st.markdown("Import Members CSV")
             uploaded_file = st.file_uploader("Choose a file")
 
             if uploaded_file is not None:
                 members = pd.read_csv(uploaded_file)
-
-                members = pd.read_csv("data/members_9_16_21.csv")
                 members = clean_members(members)
                 members_filtered = members[members['Membership Expiration Date'] <= expire_date]
 
