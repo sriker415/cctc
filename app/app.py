@@ -34,13 +34,6 @@ if pwd == password:
 
                 members = pd.read_csv("data/members_9_16_21.csv")
                 members = clean_members(members)
-
-                infra_group = pd.read_csv("data/cctc_infra_group.csv").rename({"Group Email [Required]": "Group Email"}, axis = 1)
-
-                infra_sept_oct = pd.read_csv("data/cctc_infrastructure_sept_oct_21.csv")
-                infra_sept_oct = clean_infra(infra_sept_oct)
-
-                members = members.merge(infra_group, how='left')
                 members_filtered = members[members['Membership Expiration Date'] <= expire_date]
 
                 st.table(members_filtered)
