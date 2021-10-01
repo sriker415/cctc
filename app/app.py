@@ -21,12 +21,13 @@ if pwd == password:
     # elif page == "Membership":
         
     def main():
-        st.sidebar.title("Input Parameteres")
+        st.sidebar.title("Input Data")
+
+        st.sidebar.markdown("Import Members CSV")
+        uploaded_file = st.sidebar.file_uploader("Choose a file")
+
         expire_date = pd.to_datetime(st.sidebar.date_input('Pick a Expiration Date')).strftime(format)
         result =""
-        
-        st.markdown("Import Members CSV")
-        uploaded_file = st.file_uploader("Choose a file")
 
         if uploaded_file is not None:
             members = pd.read_csv(uploaded_file)
