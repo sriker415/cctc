@@ -1,7 +1,9 @@
 import streamlit as st
-import pandas as pd
-import datetime as dt
-from cctc import clean_members, format, clean_infra
+
+import awesome_streamlit as ast
+
+import src.pages.home
+import src.pages.members
 
 st.set_page_config(
         page_title="Cape Cod Tech Council",
@@ -11,44 +13,30 @@ st.set_page_config(
 
 st.title("Cape Cod Tech Council")
 
+ast.core.services.other.set_logging_format()
+
+PAGES = {
+    "Home": src.pages.home,
+    "Membership": src.pages.members
+}
+
 text_input_container = st.empty()
 pwd = text_input_container.text_input("Enter a password", type="password")
 
 if pwd == st.secrets["password"]:
     text_input_container.empty()
-
-    # Create a page dropdown 
-    # page = st.sidebar.selectbox("Menu", ["Home", "Membership"]) 
-    # if page == "Home":
-    #     st.markdown("Welcome")
-
-    # elif page == "Membership":
-        
     def main():
-        st.sidebar.title("Input Data")
+        """Main function of the App"""
+        st.sidebar.title("Navigation")
+        selection = st.sidebar.radio("Go to", list(PAGES.keys()))
 
-        st.sidebar.markdown("Import Members CSV")
-        uploaded_file = st.sidebar.file_uploader("Choose a file")
+        page = PAGES[selection]
 
-        # st.sidebar.markdown("Import Group CSV")
-        # uploaded_file2 = st.sidebar.file_uploader("Choose aother file")
+        with st.spinner(f"Loading {selection} ..."):
+            ast.shared.components.write_page(page)
 
-        # st.sidebar.markdown("Import Infrastructure CSV")
-        # uploaded_file3 = st.sidebar.file_uploader("Choose a third file")
-
-        expire_date = pd.to_datetime(st.sidebar.date_input('Pick a Expiration Date')).strftime(format)
-        result =""
-
-        if uploaded_file is not None:
-            members = pd.read_csv(uploaded_file)
-            members = clean_members(members)
-            members_filtered = members[members['Membership Expiration Date'] <= expire_date]
-
-            st.table(members_filtered)
-    
-    if __name__=='__main__': 
+    if __name__ == "__main__":
         main()
-    
 
 elif len(pwd) > 0:
     st.markdown("Wrong Password, try again")
