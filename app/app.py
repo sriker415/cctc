@@ -10,7 +10,7 @@ st.title("Cape Cod Tech Council")
 text_input_container = st.empty()
 pwd = text_input_container.text_input("Enter a password", type="password")
 
-if pwd == password:
+if pwd == st.secrets["password"]:
     text_input_container.empty()
 
     # Create a page dropdown 
