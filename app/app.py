@@ -1,9 +1,8 @@
 import streamlit as st
-
 import awesome_streamlit as ast
 
-import src.pages.home
-import src.pages.members
+import pages.home
+import pages.members
 
 st.set_page_config(
         page_title="Cape Cod Tech Council",
@@ -16,8 +15,8 @@ st.title("Cape Cod Tech Council")
 ast.core.services.other.set_logging_format()
 
 PAGES = {
-    "Home": src.pages.home,
-    "Membership": src.pages.members
+    "Home": pages.home,
+    "Membership": pages.members
 }
 
 text_input_container = st.empty()
@@ -26,7 +25,9 @@ pwd = text_input_container.text_input("Enter a password", type="password")
 if pwd == st.secrets["password"]:
     text_input_container.empty()
     def main():
-        """Main function of the App"""
+        """
+        Main function of the App
+        """
         st.sidebar.title("Navigation")
         selection = st.sidebar.radio("Go to", list(PAGES.keys()))
 
@@ -34,7 +35,6 @@ if pwd == st.secrets["password"]:
 
         with st.spinner(f"Loading {selection} ..."):
             ast.shared.components.write_page(page)
-
     if __name__ == "__main__":
         main()
 

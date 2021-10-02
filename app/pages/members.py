@@ -1,10 +1,9 @@
-import streamlit as st
 import pandas as pd
 import datetime as dt
-from cctc import clean_members, format, clean_infra
-
+import streamlit as st
 import awesome_streamlit as ast
 
+from cctc import clean_members, format, clean_infra
 
 def write():
     """
