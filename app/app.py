@@ -20,23 +20,26 @@ PAGES = {
 }
 
 text_input_container = st.empty()
-pwd = text_input_container.text_input("Enter a password", type="password")
+pwd = text_input_container.text_input("Enter the password:", type="password")
 
-if pwd == st.secrets["password"]:
-    text_input_container.empty()
-    def main():
-        """
-        Main function of the App
-        """
-        st.sidebar.title("Navigation")
-        selection = st.sidebar.radio("Go to", list(PAGES.keys()))
+if len(pwd) == 0:
+    pass
+else:
+    if pwd == st.secrets["password"]:
+        text_input_container.empty()
+        def main():
+            """
+            Main function of the App
+            """
+            st.sidebar.title("Navigation")
+            selection = st.sidebar.radio("Go to", list(PAGES.keys()))
 
-        page = PAGES[selection]
+            page = PAGES[selection]
 
-        with st.spinner(f"Loading {selection} ..."):
-            ast.shared.components.write_page(page)
-    if __name__ == "__main__":
-        main()
+            with st.spinner(f"Loading {selection} ..."):
+                ast.shared.components.write_page(page)
+        if __name__ == "__main__":
+            main()
 
-elif len(pwd) > 0:
-    st.markdown("Wrong Password, try again")
+    elif pwd != st.secrets["password"]:
+        st.markdown("Wrong Password, try again") 

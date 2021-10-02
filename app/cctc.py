@@ -18,6 +18,7 @@ def clean_members(df, file_date):
     df['Membership Enrollment Date'] = clean_dates(df, 'Membership Enrollment Date')
     df['Membership Expiration Date'] = clean_dates(df, 'Membership Expiration Date')
     df = df.rename({'Email': 'Member Email'}, axis = 1)
+    df['Member Email'] = df['Member Email'].str.lower()
 
     return df
 
