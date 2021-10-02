@@ -16,7 +16,7 @@ ast.core.services.other.set_logging_format()
 
 PAGES = {
     "Home": pages.home,
-    "Membership": pages.members
+    "Membership Expiration": pages.members
 }
 
 text_input_container = st.empty()

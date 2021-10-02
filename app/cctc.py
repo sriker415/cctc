@@ -2,13 +2,17 @@ import pandas as pd
 
 format = "%Y-%m-%d"
 
-file_date = '2021-09-16'
-
 def clean_dates(df, column):
     df[column] = pd.to_datetime(df[column]).dt.strftime(format)
     return(df[column])
 
-def clean_members(df):
+def get_update(file_name):
+    file_name = str(file_name)
+    mth, day, year = [int(s) for s in file_name.replace("_", " ").replace(".", " ").split() if s.isdigit()]
+    file_date = str(2000 + year) + '-' + str(mth) + '-' + str(day)
+    return file_date
+
+def clean_members(df, file_date):
     df['update_date'] = file_date
     df['Membership Start Date'] = clean_dates(df, 'Membership Start Date')
     df['Membership Enrollment Date'] = clean_dates(df, 'Membership Enrollment Date')

@@ -3,7 +3,7 @@ import datetime as dt
 import streamlit as st
 import awesome_streamlit as ast
 
-from cctc import clean_members, format, clean_infra
+from cctc import clean_members, format, get_update
 
 def write():
     """
@@ -20,7 +20,8 @@ def write():
         
         if uploaded_file is not None:
             members = pd.read_csv(uploaded_file)
-            members = clean_members(members)
+            file_date = get_update(uploaded_file)
+            members = clean_members(members, file_date)
             members_filtered = members[members['Membership Expiration Date'] <= expire_date]
 
             st.table(members_filtered)
