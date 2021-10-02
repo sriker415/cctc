@@ -9,6 +9,7 @@ def write():
     with st.spinner("Loading Home ..."):
         st.write(
             """
-            Welcome to Cape Cod Tech Council App
+            Welcome to Cape Cod Tech Council App  
+            Navigate to __Membership__ page
             """
         )
