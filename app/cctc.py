@@ -14,8 +14,8 @@ def get_update(file_name):
 
 def clean_members(df, file_date):
     df['update_date'] = file_date
-    # df['Membership Start Date'] = clean_dates(df, 'Membership Start Date')
-    # df['Membership Enrollment Date'] = clean_dates(df, 'Membership Enrollment Date')
+    df['Membership Start Date'] = clean_dates(df, 'Membership Start Date')
+    df['Membership Enrollment Date'] = clean_dates(df, 'Membership Enrollment Date')
     df['Membership Expiration Date'] = clean_dates(df, 'Membership Expiration Date')
     df = df.rename({'Email': 'Member Email'}, axis = 1)
     df['Member Email'] = df['Member Email'].str.lower()
