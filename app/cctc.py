@@ -1,4 +1,6 @@
 import pandas as pd
+import base64
+from pathlib import Path
 
 format = "%Y-%m-%d"
 
@@ -28,3 +30,13 @@ def clean_infra(df):
     #get attendee number
     df['Attendee Number'] = df['Attendee Detail'].str.split().str[-1].str.replace("#", "").str.replace(")", "", regex=True)
     df['Member Email'] = df['Email 1'].str.lower()
+
+def create_download(df, filename):
+    """
+    Download dataframe as a CSV file and name file based on plan quarter, year, and department 
+    """
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+    href = f"""<a style='display: block; text-align: right;' href="data:file/csv;base64,{b64}" download="{filename}.csv">Download Members</a>"""
+    return href 
+

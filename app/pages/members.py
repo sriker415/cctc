@@ -3,6 +3,8 @@ import datetime as dt
 import streamlit as st
 import awesome_streamlit as ast
 
+from cctc import create_download
+
 from cctc import clean_members, format, get_update
 
 def write():
@@ -23,5 +25,8 @@ def write():
             file_date = get_update(uploaded_file)
             members = clean_members(members, file_date)
             members_filtered = members[members['Membership Expiration Date'] <= expire_date]
+
+            href = create_download(members_filtered, 'members_filtered')
+            st.markdown(href, unsafe_allow_html=True)
 
             st.table(members_filtered)
